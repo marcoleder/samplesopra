@@ -1,5 +1,7 @@
 ## Getting Started
 
+---
+
 ### Windows prerequisites
 If you are on windows, you first need to install WSL (windows subsystem linux).\
 We have written a simple [powershell script](./windows_prerequisites.ps1) for this.\
@@ -39,15 +41,17 @@ Else you can run
 ```bash
 cp -ar /mnt/c/your-path .
 ```
-with . indicating to copy to the current path (in this case your home folder).
-You can check if the repository was successfully copied over using ```ls``` to list folders and files, as visible in [the screenshot](./copyFolderToUbuntu.png).
+with . indicating to copy to the current path (in this case your home folder).\
+You can check if the repository was successfully copied over using ```ls``` to list folders and files, as visible in [the screenshot](./copyFolderToUbuntu.png).\
 You can then delete the downloaded folder / repository from the Windows filesystem in the explorer.
 
+---
 
 ### Installation
-To install all required software to run this repository, open a new terminal (windows users need to open a Ubuntu terminal from WSL2) in this directory / repository folder.
-For installation, we have written a shell script that will, according to the system you are using, install everything you need.
-To run the shell script, run the following command and follow the instructions.
+To install all required software to run this repository, open a new terminal (windows users need to open a Ubuntu terminal from WSL2) in this directory / repository folder.\
+For installation, we have written a shell script that will, according to the system you are using, install everything you need.\
+To run the shell script, run the following command and follow the instructions.\
+See [this example](./runningScript.png) if you are confused.
 
 ```bash
 source universal_setup.sh
@@ -56,6 +60,7 @@ source universal_setup.sh
 This can take a few minutes.
 If you encounter any issues, please close the window / shell and open a new one and try to run the command again.
 
+---
 
 ### Running the app after successful installation
 ```bash
