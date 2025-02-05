@@ -37,8 +37,8 @@ if (-not (Check-Virtualization)) {
 # Enable required Windows features via DISM
 Write-Host "Enabling required Windows features for WSL..." -ForegroundColor Green
 try {
-    dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-    dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+    C:\WINDOWS\system32\dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+    C:\WINDOWS\system32\dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
     Write-Host "Windows features enabled successfully." -ForegroundColor Green
 } catch {
     Write-Host "Failed to enable required Windows features." -ForegroundColor Red
