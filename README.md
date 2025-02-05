@@ -54,7 +54,7 @@ To run the shell script, run the following command and follow the instructions.\
 See [this example](./runningScript.png) if you are confused.
 
 ```bash
-source universal_setup.sh
+source universal_setup_minimal.sh
 ```
 
 This can take a few minutes.
