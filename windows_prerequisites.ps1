@@ -66,6 +66,14 @@ try {
     Write-Host "Failed to set WSL default version: It may already be configured." -ForegroundColor Yellow
 }
 
+Write-Host "Updating WSL..." -ForegroundColor Green
+try {
+    .\wsl --update
+    .\wsl --set-default-version 2
+} catch {
+    Write-Host "Failed to update WSL. Please install the kernel manually from here: https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi" -ForegroundColor Yellow
+}
+
 Write-Host "Checking if Ubuntu is installed..." -ForegroundColor Green
 $UbuntuInstalled = .\wsl -l -q | Select-String -Pattern "Ubuntu"
 
