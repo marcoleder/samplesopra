@@ -67,7 +67,7 @@ try {
 }
 
 Write-Host "Checking if Ubuntu is installed..." -ForegroundColor Green
-$UbuntuInstalled = wsl -l -q | Select-String -Pattern "Ubuntu"
+$UbuntuInstalled = .\wsl -l -q | Select-String -Pattern "Ubuntu"
 
 if (!$UbuntuInstalled) {
     Write-Host "Installing Ubuntu distribution for WSL..." -ForegroundColor Green
