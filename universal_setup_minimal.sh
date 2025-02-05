@@ -74,12 +74,12 @@ fi
 
 if [ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
     echo "Sourcing nix-daemon..."
-    run_command ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && sudo nix profile install nixpkgs#direnv && direnv allow"
+    run_command ". /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh && nix profile install nixpkgs#direnv && direnv allow"
     
     # source directly in shell as well
     . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
     export PATH="$HOME/.nix-profile/bin:$PATH"
-    run_command "sudo nix profile install nixpkgs#direnv && direnv allow"
+    run_command "nix profile install nixpkgs#direnv && direnv allow"
 else
     echo -e "\033[0;31mFailed to source nix-daemon. Nix-related commands will not be executed.\033[0m"
     return 1
