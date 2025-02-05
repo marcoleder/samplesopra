@@ -48,10 +48,10 @@ try {
 # Continue with the rest of the WSL setup...
 
 Write-Host "Checking if WSL is installed..." -ForegroundColor Green
-if (!(wsl --status 2>$null)) {
+if (!(.\wsl --status 2>$null)) {
     Write-Host "Installing WSL..." -ForegroundColor Green
     try {
-        wsl --install
+        .\wsl --install
     } catch {
         Write-Host "WSL installation encountered an issue." -ForegroundColor Yellow
     }
@@ -61,7 +61,7 @@ if (!(wsl --status 2>$null)) {
 
 Write-Host "Setting WSL default version to 2..." -ForegroundColor Green
 try {
-    wsl --set-default-version 2
+    .\wsl --set-default-version 2
 } catch {
     Write-Host "Failed to set WSL default version: It may already be configured." -ForegroundColor Yellow
 }
@@ -72,7 +72,7 @@ $UbuntuInstalled = wsl -l -q | Select-String -Pattern "Ubuntu"
 if (!$UbuntuInstalled) {
     Write-Host "Installing Ubuntu distribution for WSL..." -ForegroundColor Green
     try {
-        wsl --install -d Ubuntu
+        .\wsl --install -d Ubuntu
     } catch {
         Write-Host "Ubuntu installation encountered an issue." -ForegroundColor Yellow
     }
