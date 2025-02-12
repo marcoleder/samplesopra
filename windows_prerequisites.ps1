@@ -37,8 +37,8 @@ if (-not (Check-Virtualization)) {
 # Enable required Windows features via DISM
 Write-Host "Enabling required Windows features for WSL..." -ForegroundColor Green
 try {
-    dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-    dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+    C:\WINDOWS\system32\dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+    C:\WINDOWS\system32\dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
     Write-Host "Windows features enabled successfully." -ForegroundColor Green
 } catch {
     Write-Host "Failed to enable required Windows features." -ForegroundColor Red
@@ -48,10 +48,10 @@ try {
 # Continue with the rest of the WSL setup...
 
 Write-Host "Checking if WSL is installed..." -ForegroundColor Green
-if (!(wsl --status 2>$null)) {
+if (!(.\wsl --status 2>$null)) {
     Write-Host "Installing WSL..." -ForegroundColor Green
     try {
-        wsl --install
+        .\wsl --install
     } catch {
         Write-Host "WSL installation encountered an issue." -ForegroundColor Yellow
     }
@@ -61,18 +61,26 @@ if (!(wsl --status 2>$null)) {
 
 Write-Host "Setting WSL default version to 2..." -ForegroundColor Green
 try {
-    wsl --set-default-version 2
+    .\wsl --set-default-version 2
 } catch {
     Write-Host "Failed to set WSL default version: It may already be configured." -ForegroundColor Yellow
 }
 
+Write-Host "Updating WSL..." -ForegroundColor Green
+try {
+    .\wsl --update
+    .\wsl --set-default-version 2
+} catch {
+    Write-Host "Failed to update WSL. Please install the kernel manually from here: https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi" -ForegroundColor Yellow
+}
+
 Write-Host "Checking if Ubuntu is installed..." -ForegroundColor Green
-$UbuntuInstalled = wsl -l -q | Select-String -Pattern "Ubuntu"
+$UbuntuInstalled = .\wsl -l -q | Select-String -Pattern "Ubuntu"
 
 if (!$UbuntuInstalled) {
     Write-Host "Installing Ubuntu distribution for WSL..." -ForegroundColor Green
     try {
-        wsl --install -d Ubuntu
+        .\wsl --install -d Ubuntu
     } catch {
         Write-Host "Ubuntu installation encountered an issue." -ForegroundColor Yellow
     }

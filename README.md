@@ -11,7 +11,7 @@ You might need to reboot your computer before opening WSL2 / Ubuntu.\
 When opening for the first time, you will need to choose a username and password, after which your setup should look similar to [this picture](./initialUbuntuSetup.png)
 
 ```bash
-PowerShell -ExecutionPolicy Bypass -File .\windows_prerequisites.ps1
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -File .\windows_prerequisites.ps1
 ```
 
 Now that Ubuntu / WSL2 is installed, you will need to copy the whole repository folder over to the WSL2 filesystem (otherwise, the disk IO performance will be horrible).\
@@ -54,7 +54,7 @@ To run the shell script, run the following command and follow the instructions.\
 See [this example](./runningScript.png) if you are confused.
 
 ```bash
-source universal_setup.sh
+source universal_setup_minimal.sh
 ```
 
 This can take a few minutes.
