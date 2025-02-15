@@ -21,7 +21,9 @@ If you are using Windows, you first need to install WSL(Windows-Subsystem-Linux)
 ---
 3. If you experience any issues, try re-running the script a couple of times. If the installation remains unsuccessful, follow this [youtube tutorial](https://youtu.be/GIYOoMDfmkM) or post your question in the OLAT forum
 ---
-4. After successful installation, you can open WSL/Ubuntu. You will need to choose a username and password, although no characters will be shown on the screen when typing the password but the system recognizes your input, no worries :) After these four steps your setup should look similar to [this picture](./initialUbuntuSetup.png)
+4. After successful installation, you can open WSL/Ubuntu. You will need to choose a username and password, although no characters will be shown on the screen when typing the password but the system recognizes your input, no worries :) After these four steps your setup should look similar to this
+![initialUbuntuScreen](https://github.com/user-attachments/assets/4b2b7178-e2f1-400a-a3e3-da649c171aea)
+
 
 <br>
 <br>
