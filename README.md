@@ -1,7 +1,11 @@
 # Getting Started
 
+
+
 ### MacOS, Linux and WSL
 If you are using MacOS, Linux or WSL(Windows-Subsystem-Linux), you can skip directly to the [installation part](https://github.com/marcoleder/samplesopra/blob/main/README.md#installation)
+
+
 
 ### Windows
 If you are using Windows, you first need to install WSL(Windows-Subsystem-Linux). You might need to reboot your computer for the installation, therefore, save and close all your other work and programs
@@ -19,6 +23,9 @@ If you are using Windows, you first need to install WSL(Windows-Subsystem-Linux)
 ---
 4. After successful installation, you can open WSL/Ubuntu. You will need to choose a username and password, although no characters will be shown on the screen when typing the password but the system recognizes your input, no worries :) After these four steps your setup should look similar to [this picture](./initialUbuntuSetup.png)
 
+<br>
+<br>
+<br>
 
 # Installation
 1. Open a new MacOS, Linux or WSL(Windows-Subsystem-Linux) terminal. Make sure you have git installed, you can check that by running
@@ -51,6 +58,10 @@ The screenshot below shows an example of how this looks
 ![sourceScript](https://github.com/user-attachments/assets/01059677-8aff-4875-b66d-8086be15af43)
 
 The installation script _setup.sh_ can take a few minutes, please be patient and do not abort the process. If you encounter any issues, please close the terminal and open a new one and try to run the command again
+
+<br>
+<br>
+<br>
 
 # Troubleshooting the installation
 If the four steps above did not work for you and re-running the setup.sh script a couple of times did not help, try running the following steps manually
@@ -99,8 +110,10 @@ If the four steps above did not work for you and re-running the setup.sh script 
    ```
 
 If the six troubleshooting steps above still did not work for you, try the following as a **last resort**: Open a new terminal and navigate to the client repository with ```cd```. Run the command. Close the terminal again and do this for each of the six commands above, running each one in its own terminal, one after the other.
-   
----
+
+<br>
+<br>
+<br>
 
 # Available commands after successful installation
 With the installation steps above your system now has all necessary tools for developing and running the sopra frontend application. Amongst others, two javascript runtimes have been installed for running the app:
@@ -129,6 +142,65 @@ Runtimes is what your system needs to compile [typescript](https://www.typescrip
    deno task fmt
    ```
 
+All of the above mentioned commands can also be run using the nodejs runtime by substituting ```deno task``` with ```npm run```, i.e
+```bash
+npm run dev
+```
+
+<br>
+<br>
+<br>
+
+# Installing additional software by modifying [flake.nix](./flake.nix)
+As this project uses Determinate Nix for managing development software, installing additional tools you might need is straightforward. You only need to adjust the section ```nativeBuildInputs = with pkgs;``` in the [nix flake](./flake.nix) with the package you would like to install. For example, if you want to use docker (the [Dockerfile](./Dockerfile) and [.dockerignore](./.dockerignore) are already included in this repo) you can simply add:
+```nix
+        nativeBuildInputs = with pkgs;
+          [
+            nodejs
+            git
+            deno
+            watchman
+            docker ### <- added docker here
+          ]
+          ++ lib.optionals stdenv.isDarwin [
+            xcodes
+          ]
+          ++ lib.optionals (system == "aarch64-linux") [
+            qemu
+          ];
+```
+
+and add the package path to the ```shellHook''``` section
+```nix
+        devShells.default = pkgs.mkShell {
+          inherit nativeBuildInputs;
+
+          shellHook = ''
+            export HOST_PROJECT_PATH="$(pwd)"
+            export COMPOSE_PROJECT_NAME=sopra-fs25-template-client
+            
+            export PATH="${pkgs.nodejs}/bin:$PATH"
+            export PATH="${pkgs.git}/bin:$PATH"
+            export PATH="${pkgs.deno}/bin:$PATH"
+            export PATH="${pkgs.watchman}/bin:$PATH"
+            export PATH="${pkgs.docker}/bin:$PATH" ### <- added docker path here
+            
+            ### rest of code ###
+        };
+```
+
+and finally do ```direnv reload``` in your terminal inside the repository folder. If you need a specific version of a package, you can override it in the ```overlays``` section
+```nix
+        overlays = [
+          (self: super: {
+            nodejs = super.nodejs_23; ### <- changed to nodejs 23
+          })
+        ];
+```
+
+<br>
+<br>
+<br>
 
 # Miscellaneous
 This project uses
@@ -137,7 +209,6 @@ to automatically optimize and load [Geist](https://vercel.com/font), a new font
 family for Vercel.
 
 ## Learn More
-
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
@@ -149,7 +220,6 @@ You can check out
 feedback and contributions are welcome!
 
 ## Deploy on Vercel
-
 The easiest way to deploy your Next.js app is to use the
 [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
 from the creators of Next.js.
@@ -157,8 +227,6 @@ from the creators of Next.js.
 Check out our
 [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying)
 for more details.
-
----
 
 ## Windows users
 Please ensure that the repository folder is inside the WSL2 filesystem (otherwise, the disk IO performance will be horrible). If you followed the tutorial closely, this is already the case. If for whatever reason you deviated from the instructions, please take the time now to ensure the repo is on the WSL filesystem. You can do this either by
@@ -177,7 +245,7 @@ Else you can run
 ```bash
 cp -ar /mnt/c/your-path .
 ```
-with . indicating to copy to the current path (in this case your home folder). You can check if the repository was successfully copied over using ```ls``` to list folders and files, as visible in [the screenshot](./copyFolderToUbuntu.png). You can then delete the downloaded folder / repository from the Windows filesystem in the explorer.
+with . indicating to copy to the current path (in this case your home folder). You can check if the repository was successfully copied over using ```ls``` to list folders and files, as visible in the screenshot. You can then delete the downloaded folder / repository from the Windows filesystem in the explorer.
 
 
 
