@@ -43,13 +43,14 @@ If you are using Windows, you first need to install WSL(Windows-Subsystem-Linux)
 ---
 3. Navigate to the cloned directory in the terminal, in example with ```cd sopra-fs25-template-client```
 ---
-4. Inside the repository folder there is a bash script _setup.sh_ that will install everything you need, according to the system you are using. Run the following command and follow the instructions
+4. Inside the repository folder (with ```ls``` you can list files) there is a bash script _setup.sh_ that will install everything you need, according to the system you are using. Run the following command and follow the instructions
    ```shell
    source setup.sh
    ```
-   See [this example](./runningScript.png) if you are confused
+The screenshot below shows an example of how this looks
+![sourceScript](https://github.com/user-attachments/assets/01059677-8aff-4875-b66d-8086be15af43)
 
-This can take a few minutes. If you encounter any issues, please close the window / shell and open a new one and try to run the command again
+The installation script _setup.sh_ can take a few minutes, please be patient and do not abort the process. If you encounter any issues, please close the terminal and open a new one and try to run the command again
 
 # Troubleshooting the installation
 If the four steps above did not work for you and re-running the setup.sh script a couple of times did not help, try running the following steps manually
