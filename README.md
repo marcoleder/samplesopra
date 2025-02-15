@@ -7,7 +7,8 @@ If you are using MacOS, Linux or WSL(Windows-Subsystem-Linux), you can skip dire
 If you are using Windows, you first need to install WSL(Windows-Subsystem-Linux). You might need to reboot your computer for the installation, therefore, save and close all your other work and programs
 
 1. Download the following [powershell script](./windows_prerequisites.ps1)\
-IMAGE OF DOWNLOAD HERE
+![downloadWindowsScript](https://github.com/user-attachments/assets/9985eb1a-32a3-47c3-964c-a18ba5f92683)
+
 ---
 2. Open a new powershell terminal **with admin privileges** and run the following command and follow the instructions. Make sure that you open the powershell terminal at the path where you have downloaded the powershell script, otherwise the command will not work because it can not find the script. You can list currently accessible files in the powershell terminal with ```dir``` and you can use ```cd``` to navigate between directories
    ```shell
