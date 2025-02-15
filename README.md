@@ -1,7 +1,7 @@
 # Getting Started
 
 ### MacOS, Linux and WSL
-If you are using MacOS, Linux or WSL(Windows-Subsystem-Linux), you can skip directly to the [installation part](https://github.com/marcoleder/samplesopra/edit/main/README.md#installation)
+If you are using MacOS, Linux or WSL(Windows-Subsystem-Linux), you can skip directly to the [installation part](https://github.com/marcoleder/samplesopra/blob/main/README.md#installation)
 
 ### Windows
 If you are using Windows, you first need to install WSL(Windows-Subsystem-Linux). You might need to reboot your computer for the installation, therefore, save and close all your other work and programs
