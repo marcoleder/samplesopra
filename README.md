@@ -102,21 +102,35 @@ If the six troubleshooting steps above still did not work for you, try the follo
    
 ---
 
-### Running the app after successful installation
-```bash
-npm run dev
-# or
-yarn dev
-# or
-deno task dev
-```
+# Available commands after successful installation
+With the installation steps above your system now has all necessary tools for developing and running the sopra frontend application. Amongst others, two javascript runtimes have been installed for running the app:
+- [NodeJS](https://nodejs.org)
+- [Deno](https://deno.com)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
-result.
+Runtimes is what your system needs to compile [typescript](https://www.typescriptlang.org) code (used in this project) to javascript and execute the application. You can use either runtime for this project, according to your preference. Both come with an included package manager, ```npm``` for nodejs and ```deno``` for deno. Thereby, the [package.json](./package.json) file defines possible commands that can be executed (using either ```deno``` or ```npm```). The following commands are available in this repository:
+1. **Running the development server** - This will start the application in development mode, meaning that changes to the code are instantly visible live on [http://localhost:3000](http://localhost:3000) in the browser
+   ```bash
+   deno task dev
+   ```
+2. **Building a production-ready application** - This will create an optimized production build that is faster and takes up less space. It is a static build, meaning that changes to the code will only be included when the command is run again
+   ```bash
+   deno task build
+   ```
+3. **Running the production application** - This will start the optimized production build and display it on [http://localhost:3000](http://localhost:3000) in the browser. This command can only be run _after_ a production build has been created with the command above and will not preview live code changes
+   ```bash
+   deno task start
+   ```
+4. **Linting the entire codebase** - This command allows to check the entire codebase for mistakes, errors and warnings
+   ```bash
+   deno task lint
+   ```
+5. **Formatting the entire codebase** - This command will ensure that proper indentation, spacing and further styling is applied to the code. This ensures that the code looks uniform and the same across your team members, it is best to run this command _every time before pushing changes to your repository_!
+   ```bash
+   deno task fmt
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page
-auto-updates as you edit the file.
 
+# Miscellaneous
 This project uses
 [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
 to automatically optimize and load [Geist](https://vercel.com/font), a new font
@@ -146,26 +160,16 @@ for more details.
 
 ---
 
-Now that Ubuntu / WSL2 is installed, you will need to copy the whole repository folder over to the WSL2 filesystem (otherwise, the disk IO performance will be horrible).\
-You can do this either by using the Windows explorer or in the command line in WSL2.
-
-1. Windows explorer: In the left overview of all folders and drives there should be a new filesystem called Linux (also check in the network tab).\
-Open the Linux drive and open the folder named "home", followed by your username.\
-Copy the whole repository folder from your current location to the Linux folder /home/your-username (note that the folder will initially be empty).\
-Finally, delete the folder from your current location such that you only have the folder inside the Linux filesystem.
-
-2. Using the terminal: Open a new Ubuntu / WSL2 terminal window.\
-This will automatically open your home folder of the Linux file system.\
-You then need to locate where the repository / folder that you have downloaded resides.\
-You can use the ```cp -ar``` command to copy the folder from the Windows drive to the Linux filesystem.\
-The command takes the following arguments: cp **source_file** _target_file_\
-Thus we need to specify **source_file** the folder we want to copy from Windows filesystem and the _target_file_ where to copy the folder to in the Linux filesystem.\
-As visible in [this screenshot](./copyFolderToUbuntu.png), the repository folder resides under the C drive in /mnt/c/\
-If your file is not on your C drive, the folder path will be something like /mnt/d/\
-In the screenshot, the downloaded repository folder is in the Downloads folder of the current user on the C drive, thus the path for **source_file** is ```/mnt/c/Users/immol/Downloads```\
-The terminal in [the screenshot](./copyFolderToUbuntu.png) is currently in the home directory, indicated by ~ in the path in blue.\
-As we want to copy the folder to the home folder (/home/your-username) we can specify the current directory (.) as the _target_file_, thus the dot at the end of the command.\
-If you happen to not be in the home folder, you can also run the command with explicitly copying to the home folder as such:
+## Windows users
+Please ensure that the repository folder is inside the WSL2 filesystem (otherwise, the disk IO performance will be horrible). If you followed the tutorial closely, this is already the case. If for whatever reason you deviated from the instructions, please take the time now to ensure the repo is on the WSL filesystem. You can do this either by
+1. _Cloning the repository again with git in a WSL/Ubuntu terminal using the following command and deleting the repository on the windows filesystem_
+   ```shell
+   git clone https://github.com/HASEL-UZH/sopra-fs25-template-client
+   ```
+2. _Using the Windows explorer to move the repository from the windows filesystem to WSL filesystem_
+   In the left overview of all folders and drives there should be a new filesystem called Linux (also check in the network tab). Open the Linux drive and open the folder named "home", followed by your username. Copy the whole repository folder from your current location to the Linux folder /home/your-username (note that the folder will initially be empty). Finally, delete the folder from your current location such that you only have the folder inside the Linux filesystem.
+3. _Using the command line in WSL to move the repo_
+   Open a new Ubuntu / WSL2 terminal window. This will automatically open your home folder of the Linux file system. You then need to locate where the repository / folder that you have downloaded resides. You can use the ```cp -ar``` command to copy the folder from the Windows drive to the Linux filesystem. The command takes the following arguments: cp **source_file** _target_file_. Thus we need to specify **source_file** the folder we want to copy from Windows filesystem and the _target_file_ where to copy the folder to in the Linux filesystem. As visible in this screenshot ![this screenshot](https://github.com/user-attachments/assets/6736298e-b758-4b98-84d8-3c4bba12ad58) the repository folder resides under the C drive in /mnt/c/. If your file is not on your C drive, the folder path will be something like /mnt/d/. In the screenshot, the downloaded repository folder is in the Downloads folder of the current user on the C drive, thus the path for **source_file** is ```/mnt/c/Users/immol/Downloads```. The terminal in the screenshot is currently in the home directory, indicated by ~ in the path in blue. As we want to copy the folder to the home folder (/home/your-username) we can specify the current directory (.) as the _target_file_, thus the dot at the end of the command. If you happen to not be in the home folder, you can also run the command with explicitly copying to the home folder as such:
 ```bash
 cp -ar /mnt/c/your-path /home/your-username
 ```
@@ -173,9 +177,7 @@ Else you can run
 ```bash
 cp -ar /mnt/c/your-path .
 ```
-with . indicating to copy to the current path (in this case your home folder).\
-You can check if the repository was successfully copied over using ```ls``` to list folders and files, as visible in [the screenshot](./copyFolderToUbuntu.png).\
-You can then delete the downloaded folder / repository from the Windows filesystem in the explorer.
+with . indicating to copy to the current path (in this case your home folder). You can check if the repository was successfully copied over using ```ls``` to list folders and files, as visible in [the screenshot](./copyFolderToUbuntu.png). You can then delete the downloaded folder / repository from the Windows filesystem in the explorer.
 
 
 
